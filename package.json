@@ -1,0 +1,42 @@
+{
+  "name": "appleseed-metric",
+  "version": "1.0.0",
+  "description": "local trust metric algorithm",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "$(npm bin)/tape test/*.js | $(npm bin)/tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cblgh/appleseed-metric.git"
+  },
+  "keywords": [
+    "appleseed",
+    "trust",
+    "metric",
+    "transitive",
+    "trust",
+    "computational",
+    "trust",
+    "trustnet",
+    "p2p",
+    "trust"
+  ],
+  "author": "cblgh",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/cblgh/appleseed-metric/issues"
+  },
+  "homepage": "https://github.com/cblgh/appleseed-metric#readme",
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.0.1"
+  },
+  "dependencies": {
+    "trustnet-graph": "^1.0.0"
+  }
+}

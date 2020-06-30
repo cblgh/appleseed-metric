@@ -49,7 +49,11 @@ async function trust (source, trustAssignments, initialEnergy, spreadingFactor, 
       trust[CURR][node] = trust[PREV][node] + reservedTrust
       debug('previous_trust[%s] = %s', node.slice(0, 3), trust[PREV][node])
       debug('current_trust[%s] = %s', node.slice(0, 3), trust[CURR][node])
-      for (edgePair of graph.outEdges(node)) {
+      // process all outgoing edges of this node
+      const outEdges = graph.outEdges(node)
+      // calculate sum of all weights for the weightedIncoming
+      const totalWeight = outEdges.reduce((acc, e) => { return acc + parseFloat(e.weight) }, /* initial val = 0 */ 0)
+      for (const edgePair of outEdges) {
         const dst = edgePair.dst
         // we have a new node, add it
         if (!nodes[CURR].has(dst)) {
@@ -60,8 +64,6 @@ async function trust (source, trustAssignments, initialEnergy, spreadingFactor, 
           // add back-propagating edge
           graph.addEdge({ src: dst, dst: source, weight: 1.0 })
         }
-        const outEdges = graph.outEdges(node)
-        const totalWeight = outEdges.reduce((acc, e) => { return acc + parseFloat(e.weight) }, /* initial val = 0 */ 0)
         const dstWeight = parseFloat(edgePair.weight)
         const weightedIncoming = incoming[PREV][node] * (dstWeight / totalWeight)
         incoming[CURR][dst] += weightedIncoming * spreadingFactor
